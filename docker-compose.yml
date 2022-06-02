@@ -1,0 +1,55 @@
+
+networks:
+  mongo-compose-network:
+  
+version: '3'
+services:
+  recipe-book-api:
+    build:
+      context: ./api
+    ports:
+      - "3080:3080"
+    container_name: recipe-book-api
+    volumes:
+       - ./api:/usr/src/app/api
+       - /usr/src/app/api/node_modules
+       
+  recipe-book-ui:
+    build:
+      context: ./ui
+    ports:
+      - "3000:3000"
+    container_name: recipe-book-ui
+    stdin_open: true
+    volumes:
+       - ./ui:/usr/src/app/ui
+       - /usr/src/app/ui/node_modules
+
+######## Other containers #########
+
+  mongo:
+    build: 
+      context: .
+      dockerfile: api/docker/mongo/Dockerfile
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=jsyuFL325!2kjksFskuF
+      - MONGO_INITDB_DATABASE=recipe
+    ports:
+      - "27017:27017"
+    networks:
+          - mongo-compose-network
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "58081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=jsyuFL325!2kjksFskuF 
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_SERVER=mongo
+    depends_on:
+      - mongo
+    networks:
+    - mongo-compose-network
