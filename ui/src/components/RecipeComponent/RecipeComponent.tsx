@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ViewRecipeComponent from "../ViewRecipeComponent/ViewRecipeComponent";
+import { Box } from "@mui/material";
 
 interface RecipeComponentProps {
   recipe: IRecipe;
