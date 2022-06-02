@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import IRecipe from "../../../src/models/IRecipe";
-import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -16,8 +16,10 @@ interface RecipeComponentProps {
   onDelete: any;
 }
 
-
-export const RecipeComponent: FC<RecipeComponentProps> = ({ recipe, onDelete }) => {
+export const RecipeComponent: FC<RecipeComponentProps> = ({
+  recipe,
+  onDelete,
+}) => {
   const [showModal, setModalShow] = useState(false);
 
   return (
@@ -51,15 +53,15 @@ export const RecipeComponent: FC<RecipeComponentProps> = ({ recipe, onDelete }) 
           >
             Learn More
           </Button>
-          
-          <Box sx={{ marginLeft: "auto", marginRight:0 }}>
+
+          <Box sx={{ marginLeft: "auto", marginRight: 0 }}>
             <Button
               size="small"
-              onClick={ async() => {
-                 await onDelete(recipe._id);
+              onClick={async () => {
+                await onDelete(recipe._id);
               }}
             >
-             <DeleteForeverRoundedIcon  />
+              <DeleteForeverRoundedIcon />
             </Button>
           </Box>
         </CardActions>
